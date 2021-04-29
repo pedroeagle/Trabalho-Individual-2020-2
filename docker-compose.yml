@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+    postgres:
+        image: postgres:13
+        restart: unless-stopped
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres:/var/lib/postgresql/data
+            - ./api/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+        environment: 
+            POSTGRES_USER: myuser
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: myproject
+    front:
+        build:
+            context: client/
+            dockerfile: Dockerfile
+        volumes:
+            - .client:/client
+        ports:
+            - 8080:8080
+        command: "quasar dev"
+        depends_on: 
+            - postgres
+    back:
+        build:
+            context: api/
+            dockerfile: Dockerfile
+        volumes:
+            - .api:/api
+        ports:
+            - 8000:8000
+        command: bash -c 'python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000'
+        depends_on:
+            - postgres
+
+volumes:
+    postgres:
