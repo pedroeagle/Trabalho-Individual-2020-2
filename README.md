@@ -1,3 +1,6 @@
+<a href="https://codeclimate.com/github/pedroeagle/Trabalho-Individual-2020-2/maintainability"><img src="https://api.codeclimate.com/v1/badges/e38f71f356452895bc7b/maintainability" /></a>
+<a href="https://codeclimate.com/github/pedroeagle/Trabalho-Individual-2020-2/test_coverage"><img src="https://api.codeclimate.com/v1/badges/e38f71f356452895bc7b/test_coverage" /></a>
+
 # Trabalho Individual 2020.2
 
 
