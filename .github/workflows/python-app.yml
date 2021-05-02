@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
     services:
       db:
@@ -30,6 +31,8 @@ jobs:
           pip install flake8 pytest
           if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
   test:
+    needs: [ build ]
+    name: migrate and test
     runs-on: ubuntu-latest
     steps:
       - run: python api/manage.py migrate
@@ -63,6 +66,8 @@ jobs:
         with:
           coverageCommand: coverage report   
   lint:
+      needs: [ build ]
+      name: lint
       runs-on: ubuntu-latest
       steps:
         - run: |
