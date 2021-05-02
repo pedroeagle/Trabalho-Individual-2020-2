@@ -12,6 +12,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+        POSTGRES_DB: postgres
+        POSTGRES_USER: postgres
+        POSTGRES_PORT: 5432
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_HOST: localhost
     services:
       db:
           image: postgres
