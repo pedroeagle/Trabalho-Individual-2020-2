@@ -19,7 +19,8 @@ jobs:
       run: docker-compose build
       
     - name: Test back
-      run:  docker start trabalho-individual-2020-2_postgres_1
+      run:  |
+            docker start trabalho-individual-2020-2_postgres_1
             docker start trabalho-individual-2020-2_back_1
-            docker run -it trabalho-individual-2020-2_back_1 python manage.py test
+            docker exec trabalho-individual-2020-2_back_1 9dd0b25d5d9d python manage.py test
     
