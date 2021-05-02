@@ -13,6 +13,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    services:
+      db:
+          image: postgres
+          env:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PORT: 5432
+            POSTGRES_PASSWORD: postgres
+          ports:
+            - 5432:5432
 
     steps:
     - uses: actions/checkout@v2
@@ -31,11 +41,21 @@ jobs:
     - name: Migrate
       run: |
         python api/manage.py migrate
+      env:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PORT: 5432
+            POSTGRES_PASSWORD: postgres
         
     - name: Test with pytest
       run: |
         coverage python api/manage.py test
         coverage report
+      env:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PORT: 5432
+            POSTGRES_PASSWORD: postgres
         
     - name: Lint with flake8
       run: |
