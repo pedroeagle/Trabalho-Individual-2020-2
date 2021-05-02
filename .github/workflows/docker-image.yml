@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Enviroment and test backend
 
 on:
   push:
@@ -14,5 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker-compose up --build
+    
+    - name: Build application (db, back, front)
+      run: docker-compose build
+      
+    - name: Test back
+      run:  docker start trabalho-individual-2020-2_postgres_1
+            docker start trabalho-individual-2020-2_back_1
+            docker run -it trabalho-individual-2020-2_back_1 python manage.py test
+    
