@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     services:
       db:
@@ -23,49 +22,51 @@ jobs:
             POSTGRES_PASSWORD: postgres
           ports:
             - 5432:5432
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install virtualenv
         virtualenv env
         pip install flake8 pytest
         if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
-        
-    - name: Migrate
+  test:
+    runs-on: ubuntu-latest
+    services:
       run: |
         python api/manage.py migrate
-      env:
-            POSTGRES_DB: postgres
-            POSTGRES_USER: postgres
-            POSTGRES_PORT: 5432
-            POSTGRES_PASSWORD: postgres
-            POSTGRES_HOST: localhost
-        
-    - name: Test with pytest
-      run: |
         coverage run api/manage.py test api
-        
-    - uses: paambaati/codeclimate-action@v2.2.4
-      with:
-        coverageCommand: coverage report
-      env:
-            POSTGRES_DB: postgres
-            POSTGRES_USER: postgres
-            POSTGRES_PORT: 5432
-            POSTGRES_PASSWORD: postgres
-            POSTGRES_HOST: localhost
-            CC_TEST_REPORTER_ID: 2d12e82be4098ee95a47ef26d4af2bdb9e732707bb9aa83cd3d47d7dc5ca8c7a
-        
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=env
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=F401 --exclude=env
+    env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PORT: 5432
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST: localhost
+  coverage:
+      needs: [ test ]
+      name: coverage
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: '12'
+      - run: npm install -g yarn
+      - run: yarn install
+      - run: yarn build
+      - uses: paambaati/codeclimate-action@v2.2.4
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PORT: 5432
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST: localhost
+          CC_TEST_REPORTER_ID: 2d12e82be4098ee95a47ef26d4af2bdb9e732707bb9aa83cd3d47d7dc5ca8c7a
+        with:
+          coverageCommand: coverage report   
+  lint:
+      runs-on: ubuntu-latest
+      services:
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=env
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=F401 --exclude=env
