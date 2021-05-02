@@ -51,13 +51,17 @@ jobs:
     - name: Test with pytest
       run: |
         coverage run api/manage.py test api
-        coverage report
+        
+    - uses: paambaati/codeclimate-action@v2.2.4
+      with:
+        coverageCommand: coverage report
       env:
             POSTGRES_DB: postgres
             POSTGRES_USER: postgres
             POSTGRES_PORT: 5432
             POSTGRES_PASSWORD: postgres
             POSTGRES_HOST: localhost
+            CC_TEST_REPORTER_ID: 2d12e82be4098ee95a47ef26d4af2bdb9e732707bb9aa83cd3d47d7dc5ca8c7a
         
     - name: Lint with flake8
       run: |
