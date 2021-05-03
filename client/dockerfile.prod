@@ -8,6 +8,6 @@ COPY package*.json /app
 
 RUN yarn global add @quasar/cli
 RUN yarn install
-RUN yarn run build
+RUN quasar build
 
-CMD [ "yarn", "run", "start" ]
+CMD [ "node", "server.js"]
