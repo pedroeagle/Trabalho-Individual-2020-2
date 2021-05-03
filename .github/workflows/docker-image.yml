@@ -31,3 +31,6 @@ jobs:
       with:
           coverageCommand: coverage xml
           debug: true
+    - name: Test Frontend
+      run: |
+            docker-compose run front yarn run test:unit:coverage
