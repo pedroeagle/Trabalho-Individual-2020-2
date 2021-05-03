@@ -4,13 +4,11 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-COPY package.json /app
+COPY . .
 
 RUN yarn global add @quasar/cli
 RUN yarn install
 RUN yarn add express serve-static connect-history-api-fallback
 RUN yarn run build
-
-COPY . /app
 
 CMD [ "yarn", "run", "start"]
