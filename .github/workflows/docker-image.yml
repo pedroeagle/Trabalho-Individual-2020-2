@@ -25,16 +25,5 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
       with:
-          coverageCommand: coverage format-coverage
+          coverageCommand: coverage xml
           debug: true
-    - name: Test Frontend
-      run: |
-        with:
-          node-version: '12'
-    - uses: paambaati/codeclimate-action@v2.2.4
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
-      with:
-        coverageCommand: npm install -g yarn && yarn install && yarn build && yarn sum-coverage && yarn upload-coverage
-  
-    
