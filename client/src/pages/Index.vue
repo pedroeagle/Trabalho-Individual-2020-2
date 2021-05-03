@@ -71,7 +71,7 @@
 <script>
 import axios from 'axios';
 import 'dotenv/config';
-const heroku = "https://pedroeagle-gces.herokuapp.com";
+const heroku = "https://pedroeagle-api.herokuapp.com";
 const localhost = "http://localhost:8000";
 
 const host = process.env.NODE_ENV === 'development' ? localhost : heroku;
