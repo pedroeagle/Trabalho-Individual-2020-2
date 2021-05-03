@@ -1,7 +1,8 @@
-[![Python application](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/python-app.yml/badge.svg)](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/python-app.yml)
-[![Build Enviroment](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/docker-image.yml/badge.svg)](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/docker-image.yml)
 <a href="https://codeclimate.com/github/pedroeagle/Trabalho-Individual-2020-2/maintainability"><img src="https://api.codeclimate.com/v1/badges/e38f71f356452895bc7b/maintainability" /></a>
 <a href="https://codeclimate.com/github/pedroeagle/Trabalho-Individual-2020-2/test_coverage"><img src="https://api.codeclimate.com/v1/badges/e38f71f356452895bc7b/test_coverage" /></a>
+[![Build and Test](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/ci.yml/badge.svg)](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/ci.yml)
+[![Deploy API](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/deploy-api.yml/badge.svg)](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/deploy-api.yml)
+[![Deploy CLIENT](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/deploy-client.yml/badge.svg)](https://github.com/pedroeagle/Trabalho-Individual-2020-2/actions/workflows/deploy-client.yml)
 
 # Trabalho Individual 2020.2
 
