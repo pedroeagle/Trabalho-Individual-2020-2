@@ -23,6 +23,7 @@ jobs:
       run: |
             docker-compose run back python manage.py migrate 
             docker-compose run back coverage run manage.py test
+    - name: Upload backend coverage to CodeClimate
     - uses: actions/setup-python@v1
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
