@@ -69,8 +69,13 @@
 </template>
 
 <script>
+import axios from 'axios';
 import 'dotenv/config';
-import {api} from '../config/api';
+const heroku = "https://pedroeagle-gces.herokuapp.com";
+const localhost = "http://localhost:8000";
+
+const host = process.env.NODE_ENV === 'development' ? localhost : heroku;
+const api = axios.create({baseURL: host})
 
 export default {
   name: "PageIndex",
