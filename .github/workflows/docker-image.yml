@@ -26,9 +26,6 @@ jobs:
     - uses: actions/setup-python@v1
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
-      with:
-          coverageCommand: coverage xml
-          debug: true
     - name: Test Frontend
       run: |
             docker-compose run front yarn run test:unit:coverage
