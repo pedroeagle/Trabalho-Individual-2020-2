@@ -18,5 +18,5 @@ jobs:
     - name: Build and run application (db, back, front)
       run: docker-compose up --build -d
     - name: Test Backend
-      run: docker exec -i -t trabalho-individual-2020-2_back_1 python manage.py test
+      run: docker-compose run back python manage.py test 
       
