@@ -24,7 +24,7 @@ jobs:
     - name: Test Backend
       run: |
             coverage --version
-            coverage run docker-compose run back python manage.py test
+            docker-compose run back coverage run manage.py test
     - uses: paambaati/codeclimate-action@v2.5.3
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
