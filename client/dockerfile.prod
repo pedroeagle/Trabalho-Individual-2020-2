@@ -8,6 +8,7 @@ COPY package*.json /app
 
 RUN yarn global add @quasar/cli
 RUN yarn install
+RUN yarn add express serve-static connect-history-api-fallback
 RUN quasar build
 
 CMD [ "node", "server.js"]
