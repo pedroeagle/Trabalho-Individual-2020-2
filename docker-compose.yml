@@ -22,6 +22,8 @@ services:
         command: "quasar dev"
         depends_on: 
             - postgres
+        env_file:
+            - .env
     back:
         build:
             context: api/
