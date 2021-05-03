@@ -15,5 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Build application (db, back, front)
-      run: docker-compose build
+    - name: Build and run application (db, back, front)
+      run: docker-compose up --build -d
+    - name: Test Backend
+      run: docker exec -i -t trabalho-individual-2020-2_back_1 python manage.py test
+      
