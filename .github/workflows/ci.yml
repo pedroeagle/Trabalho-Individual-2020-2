@@ -25,13 +25,21 @@ jobs:
           docker-compose run back flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=F401 --exclude=env
     - name: Lint Frontend
       run: docker-compose run front yarn run lint
+      if: github.ref == 'refs/heads/master'
     - name: Test and coverage Backend
       run: |
             docker-compose run back python manage.py migrate 
             docker-compose run back coverage run manage.py test
+      if: github.ref == 'refs/heads/master'
     - uses: actions/setup-python@v1
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
+      if: github.ref == 'refs/heads/master'
     - name: Test and coverage Frontend
       run: |
-            docker-compose run front yarn run test:unit:coverage
+            docker-compose exec -T front yarn run test:unit:coverage --verbose /usr/src/app/
+      if: github.ref == 'refs/heads/master'
+    - uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./client/coverage-final.json

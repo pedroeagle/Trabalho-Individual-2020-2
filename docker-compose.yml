@@ -16,7 +16,7 @@ services:
             context: client/
             dockerfile: Dockerfile
         volumes:
-            - .client:/client
+            - ./client/coverage-final.json:/usr/src/app/test/jest/coverage/coverage-final.json
         ports:
             - 8080:8080
         command: "quasar dev"
@@ -29,7 +29,7 @@ services:
             context: api/
             dockerfile: Dockerfile
         volumes:
-            - .api:/api
+            - ./api:/api
         ports:
             - 8000:8000
         command: bash -c 'python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000'
