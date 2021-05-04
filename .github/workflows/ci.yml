@@ -35,7 +35,7 @@ jobs:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
     - name: Test and coverage Frontend
       run: |
-            docker-compose exec -T front yarn run test:unit:coverage --verbose /usr/src/app/client/src
+            docker-compose exec -T front yarn run test:unit:coverage --verbose /usr/src/app/
     - uses: codecov/codecov-action@v1
       if: github.ref == 'refs/heads/master'
       with:
