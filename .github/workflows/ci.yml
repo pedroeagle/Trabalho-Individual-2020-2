@@ -34,7 +34,7 @@ jobs:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
     - name: Test and coverage Frontend
       run: |
-            docker-compose exec -T front yarn run test:unit:coverage --verbose /usr/src/app/client/test/jest/__tests__/
+            docker-compose exec -T front yarn run test:unit:coverage --verbose /usr/src/app/test/jest/__tests__/
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.Codecov }}
