@@ -34,8 +34,8 @@ jobs:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
     - name: Test and coverage Frontend
       run: |
-            docker-compose exec front yarn run test:unit:coverage
+            docker-compose exec -T front yarn run test:unit:coverage
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.Codecov }}
-        files: ./client/test/jest/coverage/coverage-final.json
+        files: ./client/coverage-final.json
