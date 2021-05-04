@@ -35,8 +35,7 @@ jobs:
     - name: Test and coverage Frontend
       run: |
             docker-compose run front yarn run test:unit:coverage
-            docker-compose exec front cat test/jest/coverage/coverage-final.json > coverage-final.json
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.Codecov }}
-        files: ./client/coverage-final.json
+        files: ./client/test/jest/coverage/coverage-final.json
