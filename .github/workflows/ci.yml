@@ -29,15 +29,15 @@ jobs:
       run: |
             docker-compose run back python manage.py migrate 
             docker-compose run back coverage run manage.py test
-    - if: github.ref == 'refs/heads/master'
     - uses: actions/setup-python@v1
+      if: github.ref == 'refs/heads/master'
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimate }}
     - name: Test and coverage Frontend
       run: |
             docker-compose exec -T front yarn run test:unit:coverage --verbose /usr/src/app/client
-    - if: github.ref == 'refs/heads/master'
     - uses: codecov/codecov-action@v1
+      if: github.ref == 'refs/heads/master'
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: ./client/coverage-final.json
